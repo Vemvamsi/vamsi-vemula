@@ -1,0 +1,76 @@
+create database medico;
+create table doctor
+( doc_id int primary key not null,
+doc_name varchar(30),
+specialization varchar(40));
+
+create table appointments 
+(
+patiet_no int primary key not null,
+disease varchar(50),
+date_of_visit date,
+doctor_name varchar(30));
+
+create table reviews
+(
+patient_id int,
+patient_REVIEW varchar(40),
+);
+
+
+create table contact1
+(id int,
+mail_id varchar(100),
+fname varchar(30),
+iname varchar(30),
+company varchar(30),
+active_flag int,
+opt_out int);
+ insert into contact1 values(123,"a@a.com","Kian","Seth","ABC",1,1),
+(133,"b@a.com","neha","seth","ABC",1,0),(234,"c@c.com","puru","malik","CDF",0,0)
+,(342,"d@d.com","sid","maan","TEG",1,0); 
+
+select * from contact1;
+-- Select all columns from the contact table where the active flag is 1
+select * from contact1 where active_flag = 1;
+
+-- Deactivate contacts who are opted out 
+update contact1 set active_flag=0 where opt_out=0;
+
+-- Delete all the contacts who have the company name as ‘ABC’
+delete from contact1 where company="ABC";
+
+insert into contact1 values(658,"mili","mili","mili@gmail.com","DGH",1,1);
+
+update contact1 set fname="niti" where mail_id ="mili@gmail.com";
+
+create table customer
+( customer_id int,customer_name varchar(40),
+city varchar(30),grade int,salesman_id int);
+
+create table salesman
+(salesman_id int,name varchar (30),city varchar (40),commission float);
+
+insert into customer values
+(3002,"nick rimando","New york",100,5001),
+(3007,"Brad davis","New york",200,5001),
+(3005,"graham zusi","california",200,5002),
+(3008,"julian green","LOndon",300,5002),
+(3004,"fabin johnson","paris",300,5006),
+(3009,"geoff cameron","berlin",100,5003),
+(3003,"jozy altidor","moscow",200,5007),
+(3001,"Brad guzn","London",null,5005);
+select * from customer;
+
+insert into salesman values
+(5002,"nick rimando","New york",0.15),
+(5002,"nail knite","Paris",0.13),
+(5005,"pit alex","London",0.11),
+(5006,"Mc lyon","paris",0.14),
+(5007,"paul adam","Rome",0.13),
+(5003,"Lauson hen","San jose",0.12);
+
+select * from salesman ;
+
+select customer.customer_name ,customer.city,customer.grade,salesman.salesman_id
+from customer inner join salesman on customer.salesman_id = salesman.salesman_id and customer.customer_id <=100;
